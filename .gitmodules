@@ -1,0 +1,3 @@
+[submodule "src/contrib_streamlit_audio_recorder"]
+	path = src/contrib_streamlit_audio_recorder
+	url = https://github.com/stefanrmmr/streamlit_audio_recorder.git
