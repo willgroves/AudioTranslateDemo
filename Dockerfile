@@ -18,4 +18,6 @@ COPY src/ /app
 #Change Working Directory to app directory
 WORKDIR /app/
 
+RUN bash get_contrib.sh
+
 ENTRYPOINT ["bash", "start.sh"]
