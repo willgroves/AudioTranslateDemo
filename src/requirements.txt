@@ -3,3 +3,5 @@ loguru
 pandas
 numpy
 git+https://github.com/openai/whisper.git
+cattrs
+attrs

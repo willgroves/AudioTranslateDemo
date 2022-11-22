@@ -5,6 +5,7 @@ AudioTranslateUI.py
 
 import os
 import pprint
+import datetime
 from io import BytesIO
 import whisper
 import cattr
@@ -15,20 +16,20 @@ from loguru import logger
 
 st.set_page_config(layout="wide")
 
-st.title('AudioTranslateUI')
+st.title('Audio Translate Demo')
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
 build_dir = os.path.join(parent_dir, "st_audiorec/frontend/build")
 st_audiorec = components.declare_component("st_audiorec", path=build_dir)
 
-st.write("Record Audio")
+st.write("Step 1: Record Audio (will transcribe or translate up to 30 seconds of audio):")
 # STREAMLIT AUDIO RECORDER Instance
 val = st_audiorec()
 # web component returns arraybuffer from WAV-blob
-st.write('Audio data received in the Python backend will appear below this message ...')
+st.write('Audio data received in the backend will appear below this message once transferred:')
 
 if isinstance(val, dict):  # retrieve audio data
-    with st.spinner('retrieving audio-recording...'):
+    with st.spinner('Retrieving audio-recording...'):
         ind, val = zip(*val['arr'].items())
         ind = np.array(ind, dtype=int)  # convert to np array
         val = np.array(val)  # convert to np array
@@ -43,30 +44,29 @@ if isinstance(val, dict):  # retrieve audio data
         f.write(wav_bytes)
     logger.info("wrote audio.wav")
 
-st.write("Specify Language And Task")
-language = st.text_input('input language', 'en')
-task = st.text_input('task', 'transcribe')
+st.write("Step 2: Specify Language And Task")
+language = st.text_input('Input language (use language codes, e.g. "en" for English)', 'en')
+task = st.text_input('Task (transcribe, translate)', 'transcribe')
 
 model = None
-st.write("available models are: {}".format(whisper.available_models()))
+st.write("Available models are: {}".format(whisper.available_models()))
 
-model_name = st.text_input('model name', 'base')
+model_name = st.text_input('Model name (default: base)', 'base')
 assigned_model_name = None
 
-if st.button('Submit'):
-    st.write('You clicked submit')
+st.write("Step 3: Run the Model")
+if st.button('Run Model'):
+    #st.write('You clicked submit')
 
     # Do the task here
     if model is None or assigned_model_name != model_name:
-        with st.spinner('loading whisper model...'):
+        with st.spinner('Loading whisper model (this may take up to 1 minute when a model is loaded for the first time)...'):
             model = whisper.load_model(model_name)
             assigned_model_name = model_name
 
-    import datetime
-
     start = datetime.datetime.utcnow()
 
-    with st.spinner('running whisper model...'):
+    with st.spinner('Running whisper model on the audio...'):
         # load audio and pad/trim it to fit 30 seconds
         audio = whisper.load_audio("audio.wav")
         audio = whisper.pad_or_trim(audio)
@@ -82,8 +82,8 @@ if st.button('Submit'):
         options = whisper.DecodingOptions(task=task, language=language, fp16=False)
         result = whisper.decode(model, mel, options)
 
-        st.write("time taken: {}".format((datetime.datetime.utcnow() - start).total_seconds()))
+        st.write("Time taken: {} s".format((datetime.datetime.utcnow() - start).total_seconds()))
 
     # print the recognized text
-
-    st.write("Output: \n" + pprint.pformat(cattr.unstructure(result)))
+    st.write("Result:")
+    st.write(pprint.pformat(cattr.unstructure(result)))
