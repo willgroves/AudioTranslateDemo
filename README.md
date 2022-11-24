@@ -96,7 +96,8 @@ To interact with the deployed demo system, browse to https://audio.nyctaxi.me/.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Make the demo look nicer in streamlit
+- [X] Make the demo look nicer in streamlit
+- [ ] The streamlit audio recorder does not seem to be stable on mobile devices. Investigate alternatives.
 
 See the [open issues](https://github.com/willgroves/audiotranslateui/issues) for a full list of proposed features (and known issues).
 
@@ -139,7 +140,12 @@ Project Link: [https://github.com/willgroves/audiotranslatedemo](https://github.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Acknowledgments
+## References
+* Widget for recording audio in streamlit frontends: [here](https://github.com/stefanrmmr/streamlit_audio_recorder)
+* Deploying to Google Cloud Platform App Engine seems well documented: [here](https://towardsdatascience.com/deploying-streamlit-apps-to-google-cloud-platform-2b8b1f9b94a9)
+* A tutorial on deploying Streamlit applications to Google Cloud Run can be found [here](https://towardsdatascience.com/deploying-streamlit-apps-to-google-cloud-run-2f1d1a5b9527).
+* [Another article](https://www.artefact.com/blog/how-to-deploy-and-secure-your-streamlit-app-on-gcp/)
+* Name collisions for paths ending in the character z does seem to be a problem for GCP (e.g. /healthz, which is a core component of streamlit): [here](https://stackoverflow.com/questions/74185653/deploy-streamlit-on-gcp-cloud-run)
 * A great template: [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 ## Appendix
