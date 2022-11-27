@@ -18,7 +18,7 @@ st.set_page_config(layout="wide")
 st.sidebar.markdown("# Step 1: Record Audio")
 
 parent_dir = os.path.dirname(os.path.abspath(__file__))
-build_dir = os.path.join(parent_dir, "/../st_audiorec/frontend/build")
+build_dir = parent_dir+ "/../st_audiorec/frontend/build"
 st_audiorec = components.declare_component("st_audiorec", path=build_dir)
 
 st.write("Step 1: Record Audio (will transcribe or translate up to 30 seconds of audio):")
