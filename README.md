@@ -51,7 +51,7 @@
 ## Motivation
 
 This repository demonstrates deployment of a Streamlit application to the Google Cloud Platform. In particular, it exercises several features:
-* [OpenAI Whisper]() transcription and translation model in a single deep learning model (unlike the traditional two phase system of Automatic Speech Recognition and Translation)
+* [OpenAI Whisper](https://github.com/openai/whisper) transcription and translation model in a single deep learning model (unlike the traditional two phase system of Automatic Speech Recognition and Translation)
 * [Cloud Run](https://cloud.google.com/run) for hosting the application in a way that can facilitate scale to zero (no resources are consumed if the service is not being actively used)
 * [Streamlit](https://streamlit.io/) for the web frontend
 * [Docker](https://www.docker.com/) for containerization
@@ -141,7 +141,7 @@ Project Link: [https://github.com/willgroves/audiotranslatedemo](https://github.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## References
-* Widget for recording audio in streamlit frontends: [here](https://github.com/stefanrmmr/streamlit_audio_recorder)
+* Widget for recording audio in streamlit frontends: [here](https://github.com/Joooohan/audio-recorder-streamlit)
 * Deploying to Google Cloud Platform App Engine seems well documented: [here](https://towardsdatascience.com/deploying-streamlit-apps-to-google-cloud-platform-2b8b1f9b94a9)
 * A tutorial on deploying Streamlit applications to Google Cloud Run can be found [here](https://towardsdatascience.com/deploying-streamlit-apps-to-google-cloud-run-2f1d1a5b9527).
 * [Another article](https://www.artefact.com/blog/how-to-deploy-and-secure-your-streamlit-app-on-gcp/)
@@ -150,9 +150,9 @@ Project Link: [https://github.com/willgroves/audiotranslatedemo](https://github.
 
 ## Appendix
 
-It is also possible to run the whisper model from the command line with dexamples like below:
+It is also possible to run the whisper model from the command line with examples like below:
 ```shell 
-whisper audio/will.m4a --language zh
-whisper audio/will.m4a --language zh --task translate
+whisper src/audio.wav --language zh
+whisper src/audio.wav --language zh --task translate
 ```
 

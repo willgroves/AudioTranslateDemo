@@ -3,16 +3,12 @@ AudioTranslateUI.py
 
 """
 
-import os
-import pprint
 import datetime
-from io import BytesIO
-import whisper
+import pprint
+
 import cattr
-import numpy as np
 import streamlit as st
-import streamlit.components.v1 as components
-from loguru import logger
+import whisper
 
 st.set_page_config(layout="wide")
 
